@@ -1,4 +1,4 @@
-import ru.textanalysis.tfwwt.morphological.structures.storage.OmoFormList;
+import ru.textanalysis.tawt.ms.storage.OmoFormList;
 
 public class WordInComplexWordsList {
     private OmoFormList omoforms;

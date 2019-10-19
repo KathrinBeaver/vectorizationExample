@@ -1,13 +1,13 @@
 import preprocessing.AttributeType;
 import preprocessing.TextPreprocessing;
-import ru.textanalysis.tfwwt.jmorfsdk.jmorfsdk.JMorfSdk;
-import ru.textanalysis.tfwwt.jmorfsdk.jmorfsdk.load.JMorfSdkLoad;
-import ru.textanalysis.tfwwt.morphological.structures.grammeme.MorfologyParameters;
-import ru.textanalysis.tfwwt.morphological.structures.grammeme.MorfologyParametersHelper;
-import ru.textanalysis.tfwwt.morphological.structures.internal.OmoForm;
-import ru.textanalysis.tfwwt.morphological.structures.storage.OmoFormList;
+import ru.textanalysis.tawt.graphematic.parser.text.GParserImpl;
+import ru.textanalysis.tawt.graphematic.parser.text.GraphematicParser;
+import ru.textanalysis.tawt.jmorfsdk.JMorfSdk;
+import ru.textanalysis.tawt.jmorfsdk.loader.JMorfSdkFactory;
+import ru.textanalysis.tawt.ms.grammeme.MorfologyParameters;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 public class TestMorfology {
 
@@ -24,7 +24,7 @@ public class TestMorfology {
         System.out.println(listBasicPhase);
 
 
-//        JMorfSdk jMorfSdk = JMorfSdkLoad.loadFullLibrary();
+        JMorfSdk jMorfSdk = JMorfSdkFactory.loadFullLibrary();
 //
 //        jMorfSdk.getAllCharacteristicsOfForm("дорогой").forEach(form -> {
 //            if (form.getTheMorfCharacteristics(MorfologyParameters.Case.IDENTIFIER)
