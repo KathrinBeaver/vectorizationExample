@@ -1,7 +1,7 @@
 package preprocessing;
 
-import ru.textanalysis.tfwwt.jmorfsdk.jmorfsdk.JMorfSdk;
-import ru.textanalysis.tfwwt.jmorfsdk.jmorfsdk.load.JMorfSdkLoad;
+import ru.textanalysis.tawt.jmorfsdk.JMorfSdk;
+import ru.textanalysis.tawt.jmorfsdk.loader.JMorfSdkFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -65,6 +65,6 @@ public class TextPreprocessing {
      *  AVERAGE_WORD_LENGTH("average_word_length");   // Средняя длина слова
      */
     private void getLingvisticsAttribute(){
-        JMorfSdk jMorfSdk = JMorfSdkLoad.loadFullLibrary();
+        JMorfSdk jMorfSdk = JMorfSdkFactory.loadFullLibrary();
     }
 }

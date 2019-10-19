@@ -1,4 +1,4 @@
-import ru.textanalysis.tfwwt.morphological.structures.internal.OmoForm;
+import ru.textanalysis.tawt.ms.internal.OmoForm;
 
 public class WordInSimpleWordsList {
     private OmoForm mainForm; // main form
