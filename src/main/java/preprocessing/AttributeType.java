@@ -6,7 +6,7 @@ public enum AttributeType {
     HAS_FLOAT_NUMBERS("has_float_numbers"),   // Наличие чисел с плавающей запятой (1/0)
     HAS_MEASURES("has_measures"),   // Наличие единиц изменения (1/0)
     ABBREVIATION_COUNT("abbreviation_count"),   // Количество сокращений (1/0)
-    NAMES_NUMBERS("names_numbers"),   // Количество имен собственных (1/0)
+    NAMES_NUMBERS("names_numbers"),   // Количество имен собственных
     HAS_PERCENTS("has_percents"),  // Наличие процентов (1/0)
     ADJECTIVES_PERCENT("adjectives_percent"),  // Процент имен прилагательных
     AVERAGE_SENTENCE_LENGTH("average_sentence_length"),   // Средняя длина предложения

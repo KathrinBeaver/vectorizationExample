@@ -21,7 +21,6 @@
     </build>
 
     <dependencies>
-
         <dependency>
             <groupId>com.github.jalexpr</groupId>
             <artifactId>tawt</artifactId>
