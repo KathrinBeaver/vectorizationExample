@@ -1,8 +1,6 @@
-package bagofwords;
+package preprocessing;
 
-import preprocessing.AttributeType;
-import preprocessing.TextParser;
-import preprocessing.TextPreprocessing;
+import ru.textanalysis.tawt.jmorfsdk.JMorfSdk;
 import ru.textanalysis.tawt.jmorfsdk.loader.JMorfSdkFactory;
 
 import java.io.BufferedWriter;
@@ -18,23 +16,24 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
-public class BagOfWordsVectorization {
+public class TextVectorization {
+
+    private JMorfSdk jMorfSdk;
     private String name = "dataset";
     private String folderPath = "dataset";
-    private Map<String, List<List<Integer>>> vector;
-    private List<List<String>> wordsList;
+    private Map<String, List<Map<AttributeType, String>>> vector;
     private int textCount;
 
-    public BagOfWordsVectorization(String name, String folderPath) {
-        vector = new HashMap<String, List<List<Integer>>>();
-        wordsList = new ArrayList<List<String>>();
+    public TextVectorization(String name, String folderPath) {
+        vector = new HashMap<String, List<Map<AttributeType, String>>>();
         this.name = name;
         this.folderPath = folderPath;
+        jMorfSdk = JMorfSdkFactory.loadFullLibrary();
         textCount = 0;
     }
 
     public void processFiles(String pathToTexts, String className) {
-        vector.put(className, new ArrayList<List<Integer>>());
+        vector.put(className, new ArrayList<Map<AttributeType, String>>());
         try (Stream<Path> paths = Files.walk(Paths.get(pathToTexts))) {
             paths
                     .filter(Files::isRegularFile)
@@ -42,18 +41,18 @@ public class BagOfWordsVectorization {
         } catch (IOException e) {
             Logger.getLogger("TextParser").log(Level.WARNING, "Не удалось получить доступ к папке: " + pathToTexts);
         }
-        BagOfWords bagofWords = new BagOfWords(wordsList);
-        vector.put(className, bagofWords.createBag());
     }
 
     public void vectorizeText(Path fileName, String className) {
         try {
             String text = new String(Files.readAllBytes(fileName));
-            TextParser graphematicParser = new TextParser(text);
-            List<String> words = graphematicParser.getWordsInText();
-            wordsList.add(words);
+            TextPreprocessing proc = new TextPreprocessing(text);
+            proc.setjMorfSdk(jMorfSdk);
+            Map<AttributeType, String> attributesMap = proc.convertStringToAttrisbutesMap();
             textCount++;
             System.out.println(textCount + "  " + fileName);
+//            System.out.println(attributesMap);
+            vector.get(className).add(attributesMap);
         } catch (IOException e) {
             Logger.getLogger("TextParser").log(Level.WARNING, "Не удалось открыть файл: " + fileName);
         }
@@ -76,13 +75,26 @@ public class BagOfWordsVectorization {
             writer.newLine();
             writer.newLine();
 
-            // Map<String, List<List<List<Integer>>>>
-            for (Map.Entry<String, List<List<Integer>>> attributes : vector.entrySet()){
-                for (List<Integer> attrList : attributes.getValue()) {
+            writer.write("Attributes: ");
+            writer.newLine();
+            for (List<Map<AttributeType, String>> attributes : vector.values()){
+                for (AttributeType attr : attributes.get(0).keySet()){
+                    writer.write(attr.getCode());
+                    writer.newLine();
+                }
+                break;
+            }
+            writer.newLine();
+            writer.newLine();
+
+            for (Map.Entry<String, List<Map<AttributeType, String>>> attributes : vector.entrySet()){
+                for (Map<AttributeType, String> attrMap : attributes.getValue()) {
                     StringBuilder data = new StringBuilder();
-                    for (Integer value : attrList){
-                        data.append(value);
-                        data.append(",");
+//                    String data = "";
+                    for (String value : attrMap.values()){
+                       data.append(value);
+                       data.append(",");
+//                       data = data + value + ", ";
                     }
                     writer.write(data + attributes.getKey());
                     writer.newLine();
