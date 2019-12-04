@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -27,9 +29,13 @@ public class VectorizationExample {
         vectorization.processFiles(pathToTexts + "\\technics", "technics");
         vectorization.saveData();
 
-        BagOfWordsVectorization bagOfWords = new BagOfWordsVectorization("humanitariesVStechnics-bag", pathToTexts);
-        bagOfWords.processFiles(pathToTexts + "\\humanitaries", "humanitaries");
-        bagOfWords.processFiles(pathToTexts + "\\technics", "technics");
+        Set<String> categories = new HashSet<String>();
+        categories.add("humanitaries");
+        categories.add("technics");
+
+        BagOfWordsVectorization bagOfWords = new BagOfWordsVectorization("humanitariesVStechnics-bag", pathToTexts, categories);
+        bagOfWords.processFiles(pathToTexts);
+
         bagOfWords.saveData();
 
     }

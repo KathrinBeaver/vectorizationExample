@@ -82,8 +82,6 @@ public class TextPreprocessing {
      *  AVERAGE_WORD_LENGTH("average_word_length");   // Средняя длина слова
      */
     private void getLingvisticsAttribute(){
-//        GraphematicParser parser = new GParserImpl();
-//        List<List<List<String>>> sentencesList = parser.parserParagraph(text);
         TextParser graphematicParser = new TextParser(text);
         List<List<String>> sentencesList = graphematicParser.getWordsInSentence();
 
