@@ -70,10 +70,12 @@ public class BagOfWordsVectorization {
 
         List<List<Integer>> bag = bagofWords.createBag();
         this.bagSize = bag.get(0).size();
+        int count = 0;
         for (String className : numberOfItemsInClass.keySet()) {
             vector.put(className, new ArrayList<List<Integer>>());
             for (int i = 0; i < numberOfItemsInClass.get(className); i++) {
-                vector.get(className).add(bag.get(i));
+                vector.get(className).add(bag.get(count));
+                count++;
             }
         }
     }
