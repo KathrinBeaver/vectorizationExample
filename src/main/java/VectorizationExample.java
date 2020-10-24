@@ -1,18 +1,8 @@
 import bagofwords.BagOfWordsVectorization;
-import preprocessing.AttributeType;
-import preprocessing.TextPreprocessing;
 import preprocessing.TextVectorization;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 public class VectorizationExample {
 

@@ -99,6 +99,15 @@ public class TextPreprocessing {
                 wordsCount++;
 
                 jMorfSdk.getAllCharacteristicsOfForm(word).forEach(form -> {
+                    if (form.getTypeOfSpeech() == MorfologyParameters.TypeOfSpeech.ADJECTIVEFULL
+                            || form.getTypeOfSpeech() == MorfologyParameters.TypeOfSpeech.ADJECTIVESHORT) {
+                        adjectivesSet.add(word);
+                        return;
+                    }
+                });
+
+
+                jMorfSdk.getAllCharacteristicsOfForm(word).forEach(form -> {
                     if (word.length() > 2 && form.getTypeOfSpeech() == MorfologyParameters.TypeOfSpeech.ADJECTIVEFULL
                     || form.getTypeOfSpeech() == MorfologyParameters.TypeOfSpeech.ADJECTIVESHORT) {
                         adjectivesSet.add(word);

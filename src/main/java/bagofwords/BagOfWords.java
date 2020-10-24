@@ -43,7 +43,6 @@ public class BagOfWords {
     }
 
     public static void main(String[] args) {
-        System.out.println("erwer");
         List<List<String>> inputData = new ArrayList<List<String>>();
         inputData.add(new ArrayList<String>());
         inputData.get(0).add("мама");
