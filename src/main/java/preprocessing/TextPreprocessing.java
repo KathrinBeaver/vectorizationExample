@@ -98,26 +98,26 @@ public class TextPreprocessing {
                 averageWordLength += word.length();
                 wordsCount++;
 
-                jMorfSdk.getMorphologyCharacteristics(word).forEach(form -> {
-                    if (form == MorfologyParameters.TypeOfSpeech.ADJECTIVE_FULL
-                            || form == MorfologyParameters.TypeOfSpeech.ADJECTIVE_SHORT) {
+                jMorfSdk.getOmoForms(word).forEach(form -> {
+                    if (form.getTypeOfSpeech() == MorfologyParameters.TypeOfSpeech.ADJECTIVE_FULL
+                            || form.getTypeOfSpeech() == MorfologyParameters.TypeOfSpeech.ADJECTIVE_SHORT) {
                         adjectivesSet.add(word);
                         return;
                     }
                 });
 
 
-                jMorfSdk.getMorphologyCharacteristics(word).forEach(form -> {
-                    if (word.length() > 2 && form == MorfologyParameters.TypeOfSpeech.ADJECTIVE_FULL
-                    || form == MorfologyParameters.TypeOfSpeech.ADJECTIVE_SHORT) {
+                jMorfSdk.getOmoForms(word).forEach(form -> {
+                    if (word.length() > 2 && form.getTypeOfSpeech() == MorfologyParameters.TypeOfSpeech.ADJECTIVE_FULL
+                    || form.getTypeOfSpeech() == MorfologyParameters.TypeOfSpeech.ADJECTIVE_SHORT) {
                         adjectivesSet.add(word);
                         return;
                     }
                 });
 
                 if (pos != 0 && !word.equals(word.toLowerCase())) {
-                    jMorfSdk.getMorphologyCharacteristics(word).forEach(form -> {
-                        if (form == MorfologyParameters.TypeOfSpeech.NOUN) {
+                    jMorfSdk.getOmoForms(word).forEach(form -> {
+                        if (form.getTypeOfSpeech() == MorfologyParameters.TypeOfSpeech.NOUN) {
                             namesCount.getAndIncrement();
                         }
                     });
