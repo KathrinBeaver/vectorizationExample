@@ -1,7 +1,7 @@
 package preprocessing;
 
 import ru.textanalysis.tawt.jmorfsdk.JMorfSdk;
-import ru.textanalysis.tawt.jmorfsdk.loader.JMorfSdkFactory;
+import ru.textanalysis.tawt.jmorfsdk.JMorfSdkFactory;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

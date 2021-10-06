@@ -1,7 +1,7 @@
 package preprocessing;
 
 import ru.textanalysis.tawt.jmorfsdk.JMorfSdk;
-import ru.textanalysis.tawt.jmorfsdk.loader.JMorfSdkFactory;
+import ru.textanalysis.tawt.jmorfsdk.JMorfSdkFactory;
 import ru.textanalysis.tawt.ms.grammeme.MorfologyParameters;
 
 import java.util.*;
@@ -98,26 +98,26 @@ public class TextPreprocessing {
                 averageWordLength += word.length();
                 wordsCount++;
 
-                jMorfSdk.getAllCharacteristicsOfForm(word).forEach(form -> {
-                    if (form.getTypeOfSpeech() == MorfologyParameters.TypeOfSpeech.ADJECTIVEFULL
-                            || form.getTypeOfSpeech() == MorfologyParameters.TypeOfSpeech.ADJECTIVESHORT) {
+                jMorfSdk.getMorphologyCharacteristics(word).forEach(form -> {
+                    if (form == MorfologyParameters.TypeOfSpeech.ADJECTIVE_FULL
+                            || form == MorfologyParameters.TypeOfSpeech.ADJECTIVE_SHORT) {
                         adjectivesSet.add(word);
                         return;
                     }
                 });
 
 
-                jMorfSdk.getAllCharacteristicsOfForm(word).forEach(form -> {
-                    if (word.length() > 2 && form.getTypeOfSpeech() == MorfologyParameters.TypeOfSpeech.ADJECTIVEFULL
-                    || form.getTypeOfSpeech() == MorfologyParameters.TypeOfSpeech.ADJECTIVESHORT) {
+                jMorfSdk.getMorphologyCharacteristics(word).forEach(form -> {
+                    if (word.length() > 2 && form == MorfologyParameters.TypeOfSpeech.ADJECTIVE_FULL
+                    || form == MorfologyParameters.TypeOfSpeech.ADJECTIVE_SHORT) {
                         adjectivesSet.add(word);
                         return;
                     }
                 });
 
                 if (pos != 0 && !word.equals(word.toLowerCase())) {
-                    jMorfSdk.getAllCharacteristicsOfForm(word).forEach(form -> {
-                        if (form.getTypeOfSpeech() == MorfologyParameters.TypeOfSpeech.NOUN) {
+                    jMorfSdk.getMorphologyCharacteristics(word).forEach(form -> {
+                        if (form == MorfologyParameters.TypeOfSpeech.NOUN) {
                             namesCount.getAndIncrement();
                         }
                     });
